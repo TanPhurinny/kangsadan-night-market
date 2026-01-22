@@ -1,0 +1,13 @@
+-- CreateEnum
+CREATE TYPE "AnnouncementStatus" AS ENUM ('DRAFT', 'PUBLISHED');
+
+-- CreateTable
+CREATE TABLE "Announcement" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "status" "AnnouncementStatus" NOT NULL DEFAULT 'PUBLISHED',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Announcement_pkey" PRIMARY KEY ("id")
+);

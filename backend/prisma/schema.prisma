@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Announcement {
+  id        Int                @id @default(autoincrement())
+  title     String
+  content   String
+  status    AnnouncementStatus @default(PUBLISHED)
+  createdAt DateTime           @default(now())
+}
+
+enum AnnouncementStatus {
+  DRAFT
+  PUBLISHED
+}
