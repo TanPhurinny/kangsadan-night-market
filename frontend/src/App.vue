@@ -1,34 +1,35 @@
 <template>
-  <div>
-    <h1>ประกาศข่าวสาร</h1>
-    <input v-model="title" placeholder="Title">
-    <input v-model="content" placeholder="Content">
-    <button @click="addNews">Add</button>
-    <ul>
-      <li v-for="ann in store.announcements" :key="ann.id">
-        {{ ann.title }} - {{ ann.content }}
-      </li>
-    </ul>
+  <div id="app" class="container mt-4">
+    <h1 class="text-center mb-4">ระบบตลาดนัด</h1>
+
+    <!-- Component ประกาศ -->
+    <Announcements />
+
+    <!-- ตัวอย่างส่วนอื่น ๆ ของหน้า -->
+    <div class="mt-5">
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { useAnnouncementStore } from "./stores/announcement.js";
+<script>
+// import Bootstrap CSS/JS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const store = useAnnouncementStore();
-const title = ref("");
-const content = ref("");
+// import component ของเรา
+import Announcements from './components/Announcements.vue'; // <-- แก้ path ให้ตรงกับโฟลเดอร์จริง
 
-const addNews = async () => {
-  if(title.value && content.value){
-    await store.addAnnouncement(title.value, content.value);
-    title.value = "";
-    content.value = "";
+export default {
+  name: 'App',
+  components: {
+    Announcements
   }
 }
-
-onMounted(() => {
-  store.fetchAnnouncements();
-});
 </script>
+
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+}
+</style>
