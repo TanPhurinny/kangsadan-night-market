@@ -14,10 +14,12 @@ model User {
 }
 
 model Announcement {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
   content   String
-  status    String?   
-  createdAt DateTime  @default(now())
+  imageUrl  String?
+  status    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
